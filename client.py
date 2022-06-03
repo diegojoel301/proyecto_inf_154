@@ -1,5 +1,56 @@
 import socket
-def automata_finito(caracter):
+def automata_finito_decodificador(cadena):
+        alphabet = ['.', '/', '-']
+
+        TablaT = [['ini', '-', 't'], ['ini', '/', ' '], ['ini', '.', 'e'],
+                                ['t', '-', 'm'], ['t', '.', 'n'], ['e', '-', 'a'], ['e', '.', 'i'],
+                                ['m', '-', 'o'], ['m', '.', 'g'], ['n', '-', 'k'], ['n', '.', 'd'],
+                                ['a', '-', 'w'], ['a', '.', 'r'], ['i', '-', 'u'], ['i', '.', 's'],
+                                ['g', '-', 'q'], ['g', '.', 'z'], ['k', '-', 'y'], ['k', '.', 'c'],
+                                ['d', '-', 'x'], ['d', '.', 'b'], ['w', '-', 'j'], ['w', '.', 'p'],
+                                ['r', '.', 'l'], ['u', '.', 'f'], ['s', '-', 'v'], ['s', '.', 'h'],
+                                ['q', '-', 'ñ']]
+
+        bandera = True
+
+        TablaC = [] # Tabla para almacenar los estados que se mueven
+
+        EI = 'ini' # Estado inicial q0
+
+        EF = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 
+                'l', 'm', 'n', 'ñ','o','p', 'q', 'r', 's', 't', 'u', 'v',
+                'w', 'x', 'y', 'z', ' '] # Estado Final qf
+
+        EA = EI # Estado Actual
+
+        for caracter in cadena:
+                # Verificar que el caracter pertenezca al alphabet = ['x']
+                if caracter in alphabet:
+                        # Buscar en la tabla el caracter
+                        for f in TablaT:
+                                # Recorrer las transiciones de la tabla
+                                # Indicar el estado actual y el estado final
+                                if caracter == f[1] and EA == f[0]:
+                                        # Agregar elementos a la tabla comparativa
+                                        TablaC.append([EA, caracter, f[2]])
+                                        # Actualizar el estado
+                                        EA = f[2]
+                                        break
+                else:
+                        bandera = False
+                        break
+        # Comparar si el estado actual es igual al estado final
+
+        if EA in EF and bandera == True:
+                return EA
+        return "-1"
+def decodificacion_cadena(cadena):
+        salida = str()
+
+        for caracter in cadena.split(' '):
+                salida = salida + automata_finito_decodificador(caracter)
+        return salida
+def automata_finito_codificador(caracter):
         alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 
                 'l', 'm', 'n', 'ñ', 'o','p', 'q', 'r', 's', 't', 'u', 'v','w', 'x', 'y', 'z', ' ']
 
@@ -46,11 +97,10 @@ def automata_finito(caracter):
         if EA in EF and bandera == True:
                 return EA
         return "-1"
-
 def codifica_cadena(cadena):
         salida = str()
         for caracter in cadena:
-                salida += automata_finito(caracter) + " "
+                salida += automata_finito_codificador(caracter) + " "
         return salida[0:len(salida) - 1]
 
 while True:
@@ -64,6 +114,7 @@ while True:
 
         respuesta = mi_socket.recv(1024)
 
-        print(respuesta.decode())
+        print(decodificacion_cadena(respuesta.decode()))
 
         mi_socket.close()
+
