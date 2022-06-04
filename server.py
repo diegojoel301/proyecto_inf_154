@@ -108,7 +108,7 @@ def codifica_cadena(cadena):
         return salida[0:len(salida) - 1]
 
 mi_socket = socket.socket()
-mi_socket.bind( ('192.168.146.128', 8000) )
+mi_socket.bind( ('192.168.146.139', 8000) )
 
 mi_socket.listen(5)
 
