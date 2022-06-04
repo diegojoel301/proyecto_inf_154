@@ -55,7 +55,7 @@ def decodificacion_cadena(cadena):
 	return salida
 
 mi_socket = socket.socket()
-mi_socket.bind( ('192.168.146.128', 8000) )
+mi_socket.bind( ('192.168.146.139', 8000) )
 
 mi_socket.listen(5)
 
