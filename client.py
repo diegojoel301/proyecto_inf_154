@@ -106,7 +106,7 @@ def codifica_cadena(cadena):
 while True:
         mi_socket = socket.socket()
 
-        mi_socket.connect( ('192.168.146.128', 8000) )
+        mi_socket.connect( ('192.168.146.139', 8000) )
 
         #print(mensaje)
 
