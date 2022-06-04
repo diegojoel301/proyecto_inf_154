@@ -69,7 +69,7 @@ while True:
 	salida = str()
 
 	for linea in peticion[0:len(peticion) - 1].split('\n'):
-		print(linea)
+		#print(linea)
 		salida += decodificacion_cadena(linea) + "\n"
 
 	print(salida)
