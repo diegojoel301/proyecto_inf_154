@@ -26,7 +26,7 @@ def automata_finito_decodificador(cadena):
 	EA = EI # Estado Actual
 
 	for caracter in cadena:
-		# Verificar que el caracter pertenezca al alphabet = ['x']
+		# Verificar que el caracter pertenezca al alphabet
 		if caracter in alphabet:
 			# Buscar en la tabla el caracter
 			for f in TablaT:
